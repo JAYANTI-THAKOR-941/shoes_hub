@@ -1,63 +1,118 @@
 import { useEffect, useState } from "react";
+import './admin.css';
 
-const ProductManagement = ()=>{
+const ProductManagement = () => {
 
-    const [products,setProducts] = useState(()=>{
+    const [products, setProducts] = useState(() => {
         const allProducts = localStorage.getItem('products');
-        return allProducts ? JSON.parse(allProducts):[];
+        return allProducts ? JSON.parse(allProducts) : [];
     });
 
-    const [name,setName] = useState("");
-    const [description,setDescription] = useState("");
-    const [price,setPrice] = useState("");
-    const [image,setImage] = useState("");
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [price, setPrice] = useState("");
+    const [image, setImage] = useState("");
 
-    // const [form,setForm] = useState([]);
+    const [open, setOpen] = useState(false);
 
-    // const handleChange = (e)=>{
-    //     setForm({...form,[e.target.name]:e.target.value});
-    // }
+    const [editId, setEditId] = useState(null);
 
 
-    useEffect(()=>{
-        localStorage.setItem('products',JSON.stringify(products));
-    },[products])
+    useEffect(() => {
+        localStorage.setItem('products', JSON.stringify(products));
+    }, [products]);
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        let updatedProducts;
-
-        updatedProducts = {
-            id:Date.now(),
-            name:name,
-            description:description,
-            price:price,
-            image:image
+        if (editId) {
+            const updated = products.map((p) => {
+                if (p.id === editId) {
+                    return { id: editId, name, description, price, image }
+                }
+                return p;
+            })
+            
+            setProducts(updated);
+            setEditId(null);
+            alert("Product Updated Successfully.!");
         }
+        else {
+            let newProduct;
 
-        setProducts([...products,updatedProducts]);
-        alert("Product Added Successfully.!");
+            newProduct = {
+                id: Date.now(),
+                name: name,
+                description: description,
+                price: price,
+                image: image
+            }
+
+            setProducts([...products, newProduct]);
+            alert("Product Added Successfully.!");
+
+        }
 
         setName("");
         setDescription("");
         setPrice("");
         setImage("");
-        
+
     }
 
-    return(
-        <>
-            <h1>Product Management</h1>
+    const handleEdit = (p) => {
+        setOpen(true);
+        setName(p.name);
+        setDescription(p.description);
+        setPrice(p.price);
+        setImage(p.image);
+        setEditId(p.id);
+    }
 
-            <form onSubmit={handleSubmit}>
-                <input type="text" name="name" value={name} onChange={(e)=>setName(e.target.value)} placeholder="Enter product name" />
-                <input type="text" name="description" value={description} onChange={(e)=>setDescription(e.target.value)} placeholder="Enter product description" />
-                
-                <input type="text" name="price" value={price} onChange={(e)=>setPrice(e.target.value)} placeholder="Enter product price" />
-                <input type="text" name="image" value={image} onChange={(e)=>setImage(e.target.value)} placeholder="Enter product image" />
-                <button>Add Product</button>
-            </form>     
+    const handleDelete = (id) => {
+        const filter = products.filter((p) => p.id !== id);
+        setProducts(filter);
+    }
+
+    return (
+        <>
+            <h1 className="title">Product Management</h1>
+            <button className="add-btn" onClick={() => setOpen(true)}>Add New Product</button>
+            <table>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+                {
+                    products.map((p) => (
+                        <tr key={p.id}>
+                            <td><img src={p.image} alt="" /></td>
+                            <td>{p.name}</td>
+                            <td>{p.description}</td>
+                            <td>{p.price}</td>
+                            <td><button onClick={() => handleEdit(p)}>Edit</button><button onClick={() => handleDelete(p.id)} style={{ backgroundColor: "red" }}>Delete</button></td>
+                        </tr>
+                    ))
+                }
+            </table>
+
+            {
+                open && <form className="form-container" onSubmit={handleSubmit}>
+                    {editId ? <h1>Update Product</h1> : <h1>Add New Product</h1>}
+                    <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter product name" />
+                    <input type="text" name="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Enter product description" />
+
+                    <input type="text" name="price" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Enter product price" />
+                    <input type="text" name="image" value={image} onChange={(e) => setImage(e.target.value)} placeholder="Enter product image" />
+                    {editId ? <button>Update</button> : <button>Add Product</button>}
+                    <button onClick={() => setOpen(false)} style={{ backgroundColor: "black" }}>Cancel</button>
+                </form>
+            }
+
+           
         </>
     )
 }

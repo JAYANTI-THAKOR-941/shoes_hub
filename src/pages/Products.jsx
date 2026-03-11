@@ -7,8 +7,12 @@ const Products = () => {
 
   return (
     <div>
-      <h1>Explore Our Products</h1>
-      {
+     <div className="heading">
+       <h1>Step Into Style with ShoesHub</h1>
+      <p>Discover the perfect blend of comfort, durability, and modern design. ShoesHub brings you premium footwear crafted to support every step of your journey—whether you're heading to work, the gym, or a night out.</p>
+     </div>
+      <div className="product-container">
+        {
         !products ? <h2>Product Not Found.!!</h2> : <>
           {
             products.map((p) => (
@@ -16,13 +20,14 @@ const Products = () => {
                 <img src={p.image} alt="" />
                 <h3>{p.name}</h3>
                 <p>{p.description}</p>
-                <p>{p.price}</p>
+                <p>Price : ₹{p.price}</p>
                 <button>View Details</button>
               </div>
             ))
           }
         </>
       }
+      </div>
     </div>
   )
 }
