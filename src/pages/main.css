@@ -68,3 +68,42 @@ a{
     width: 50%;
     margin: 12px auto;
 }
+
+/* product-description */
+.product-description{
+    display: flex;
+    margin: 4% auto;
+    justify-content: space-around;
+}
+.product-image img{
+    width: 450px;
+    border-radius: 5px;
+}
+.product-info p{
+    margin: 14px 0;
+}
+.cart-btn{
+    margin-left: 0;
+}
+
+/* hero */
+.hero{
+    height: 92vh;
+    background: linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.5)),url('https://demos.codezeel.com/wordpress/WCM11/WCM110275/default/wp-content/uploads/2025/09/main-banner-1.jpg') no-repeat;
+    background-size: cover;
+    color: white;
+}
+.hero-content{
+    padding-top: 15%;
+    padding-left: 10%;
+}
+.hero-content h4{
+    margin: 14px 0;
+}
+.hero-content p{
+    width: 50%;
+    margin-bottom: 14px;
+}
+.explore-btn{
+    padding: 12px 28px;
+}

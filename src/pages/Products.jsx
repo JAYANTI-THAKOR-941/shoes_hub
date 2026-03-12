@@ -1,7 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const Products = () => {
 
+  const navigate = useNavigate();
 
   const products = JSON.parse(localStorage.getItem('products'));
 
@@ -21,7 +23,7 @@ const Products = () => {
                 <h3>{p.name}</h3>
                 <p>{p.description}</p>
                 <p>Price : ₹{p.price}</p>
-                <button>View Details</button>
+                <button className='cart-btn' onClick={()=>navigate(`/product/${p.id}`)}>View Details</button>
               </div>
             ))
           }

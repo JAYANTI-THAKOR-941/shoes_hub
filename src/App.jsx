@@ -10,6 +10,7 @@ import Contact from './pages/Contact'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import ProductManagement from './admin/ProductManagement'
+import ProductDescription from './pages/ProductDescription'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
       <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/products' element={<Products/>} />
+          <Route path='/product/:id' element={<ProductDescription/>} />
           <Route path='/services' element={<Services/>} />
           <Route path='/about' element={<About/>} />
           <Route path='/contact' element={<Contact/>} />

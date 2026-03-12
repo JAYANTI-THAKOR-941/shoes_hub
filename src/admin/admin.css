@@ -18,6 +18,7 @@ table,tr,th,td{
     border: 1px solid black;
     border-collapse: collapse;
     padding: 8px;
+    text-align: center;
 }
 td img{
     object-fit: contain;

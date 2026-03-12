@@ -10,6 +10,7 @@ const ProductManagement = () => {
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+    const [longDescription, setLongDescription] = useState("");
     const [price, setPrice] = useState("");
     const [image, setImage] = useState("");
 
@@ -44,6 +45,7 @@ const ProductManagement = () => {
                 id: Date.now(),
                 name: name,
                 description: description,
+                longDescription:longDescription,
                 price: price,
                 image: image
             }
@@ -55,6 +57,7 @@ const ProductManagement = () => {
 
         setName("");
         setDescription("");
+        setLongDescription("");
         setPrice("");
         setImage("");
 
@@ -64,6 +67,7 @@ const ProductManagement = () => {
         setOpen(true);
         setName(p.name);
         setDescription(p.description);
+        setLongDescription(p.longDescription)
         setPrice(p.price);
         setImage(p.image);
         setEditId(p.id);
@@ -81,9 +85,9 @@ const ProductManagement = () => {
             <table>
                 <tr>
                     <th>Image</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
+                    <th style={{width:"25%"}}>Name</th>
+                    <th style={{width:"30%"}}>Description</th>
+                    <th style={{width:"10%"}}>Price</th>
                     <th>Action</th>
                 </tr>
                 {
@@ -104,6 +108,8 @@ const ProductManagement = () => {
                     {editId ? <h1>Update Product</h1> : <h1>Add New Product</h1>}
                     <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter product name" />
                     <input type="text" name="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Enter product description" />
+
+                    <input type="text" name="longDescription" value={longDescription} onChange={(e) => setLongDescription(e.target.value)} placeholder="Enter product longDescription" />
 
                     <input type="text" name="price" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Enter product price" />
                     <input type="text" name="image" value={image} onChange={(e) => setImage(e.target.value)} placeholder="Enter product image" />
