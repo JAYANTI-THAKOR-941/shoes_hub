@@ -107,3 +107,17 @@ a{
 .explore-btn{
     padding: 12px 28px;
 }
+
+.filter-container{
+    display: flex;
+    justify-content: end;
+    margin: 2% 4%;
+    gap: 20px;
+}
+.filter-container input{
+    padding: 12px;
+    width: 20%;
+}
+.filter-container select{
+    width: 10%;
+}

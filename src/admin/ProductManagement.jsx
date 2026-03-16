@@ -11,6 +11,7 @@ const ProductManagement = () => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [longDescription, setLongDescription] = useState("");
+    const [category,setCategory] = useState("");
     const [price, setPrice] = useState("");
     const [image, setImage] = useState("");
 
@@ -29,7 +30,7 @@ const ProductManagement = () => {
         if (editId) {
             const updated = products.map((p) => {
                 if (p.id === editId) {
-                    return { id: editId, name, description, price, image }
+                    return { id: editId, name, description,longDescription,category, price, image }
                 }
                 return p;
             })
@@ -46,6 +47,7 @@ const ProductManagement = () => {
                 name: name,
                 description: description,
                 longDescription:longDescription,
+                category:category,
                 price: price,
                 image: image
             }
@@ -58,6 +60,7 @@ const ProductManagement = () => {
         setName("");
         setDescription("");
         setLongDescription("");
+        setCategory("");
         setPrice("");
         setImage("");
 
@@ -67,7 +70,8 @@ const ProductManagement = () => {
         setOpen(true);
         setName(p.name);
         setDescription(p.description);
-        setLongDescription(p.longDescription)
+        setLongDescription(p.longDescription);
+        setCategory(p.category);
         setPrice(p.price);
         setImage(p.image);
         setEditId(p.id);
@@ -110,6 +114,8 @@ const ProductManagement = () => {
                     <input type="text" name="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Enter product description" />
 
                     <input type="text" name="longDescription" value={longDescription} onChange={(e) => setLongDescription(e.target.value)} placeholder="Enter product longDescription" />
+
+                    <input type="text" name="category" value={category} onChange={(e) => setCategory(e.target.value)} placeholder="Enter product category" />
 
                     <input type="text" name="price" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Enter product price" />
                     <input type="text" name="image" value={image} onChange={(e) => setImage(e.target.value)} placeholder="Enter product image" />
