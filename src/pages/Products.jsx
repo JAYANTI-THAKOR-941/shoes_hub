@@ -8,7 +8,7 @@ const Products = () => {
   // const products = JSON.parse(localStorage.getItem('products'));
 
   const [products, setProducts] = useState(() => {
-    const allProducts = localStorage.getItem('products');
+    const allProducts = localStorage.getItem('foodProducts');
     return allProducts ? JSON.parse(allProducts) : [];
   });
 
@@ -17,7 +17,7 @@ const Products = () => {
 
   const filterdProducts = products.filter((p) => {
     const matchSearch = p.name.toLowerCase().includes(search.toLowerCase());
-    const matchCategory = category === 'all' ? true : p.category.toLowerCase() === category;
+    const matchCategory = category === 'all' ? true : p.category === category;
     return matchSearch && matchCategory;
   })
 
@@ -25,17 +25,17 @@ const Products = () => {
   return (
     <div>
       <div className="heading">
-        <h1>Step Into Style with ShoesHub</h1>
-        <p>Discover the perfect blend of comfort, durability, and modern design. ShoesHub brings you premium footwear crafted to support every step of your journey—whether you're heading to work, the gym, or a night out.</p>
+        <h1>Street-Style Taste, Premium Quality</h1>
+        <p>Experience the rich taste of smoky paneer infused with authentic Indian spices — a dish crafted to delight every bite.</p>
       </div>
       <div className="filter-container">
         <input type="text" placeholder='Search products' onChange={(e) => setSearch(e.target.value)} />
 
         <select name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="all">All</option>
-          <option value="sneakers">Sneakers</option>
-          <option value="formal">Formal</option>
-          <option value="sports">Sports</option>
+          {[...new Set(filterdProducts?.map(p=>p.category))].map((category,index)=>(
+            <option key={index} value={category}>{category}</option>
+          ))}
         </select>
       </div>
       <div className="product-container">
@@ -48,8 +48,12 @@ const Products = () => {
                   <h3>{p.name}</h3>
                   <p>{p.description}</p>
                   <p>{p.category}</p>
-                  <p>Price : ₹{p.price}</p>
-                  <button className='cart-btn' onClick={() => navigate(`/product/${p.id}`)}>View Details</button>
+                 <div className="bottom">
+                   <p>Price : ₹{p.price}</p>
+                 <div className="btn-div">
+                   <button className='cart-btn' onClick={() => navigate(`/product/${p.id}`)}>View Details</button>
+                 </div>
+                 </div>
                 </div>
               ))
             }

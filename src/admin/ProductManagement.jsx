@@ -4,14 +4,14 @@ import './admin.css';
 const ProductManagement = () => {
 
     const [products, setProducts] = useState(() => {
-        const allProducts = localStorage.getItem('products');
+        const allProducts = localStorage.getItem('foodProducts');
         return allProducts ? JSON.parse(allProducts) : [];
     });
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [longDescription, setLongDescription] = useState("");
-    const [category,setCategory] = useState("");
+    const [category, setCategory] = useState("");
     const [price, setPrice] = useState("");
     const [image, setImage] = useState("");
 
@@ -21,7 +21,7 @@ const ProductManagement = () => {
 
 
     useEffect(() => {
-        localStorage.setItem('products', JSON.stringify(products));
+        localStorage.setItem('foodProducts', JSON.stringify(products));
     }, [products]);
 
     const handleSubmit = (e) => {
@@ -30,11 +30,11 @@ const ProductManagement = () => {
         if (editId) {
             const updated = products.map((p) => {
                 if (p.id === editId) {
-                    return { id: editId, name, description,longDescription,category, price, image }
+                    return { id: editId, name, description, longDescription, category, price, image }
                 }
                 return p;
             })
-            
+
             setProducts(updated);
             setEditId(null);
             alert("Product Updated Successfully.!");
@@ -46,8 +46,8 @@ const ProductManagement = () => {
                 id: Date.now(),
                 name: name,
                 description: description,
-                longDescription:longDescription,
-                category:category,
+                longDescription: longDescription,
+                category: category,
                 price: price,
                 image: image
             }
@@ -89,9 +89,9 @@ const ProductManagement = () => {
             <table>
                 <tr>
                     <th>Image</th>
-                    <th style={{width:"25%"}}>Name</th>
-                    <th style={{width:"30%"}}>Description</th>
-                    <th style={{width:"10%"}}>Price</th>
+                    <th style={{ width: "25%" }}>Name</th>
+                    <th style={{ width: "30%" }}>Description</th>
+                    <th style={{ width: "10%" }}>Price</th>
                     <th>Action</th>
                 </tr>
                 {
@@ -124,7 +124,7 @@ const ProductManagement = () => {
                 </form>
             }
 
-           
+
         </>
     )
 }
