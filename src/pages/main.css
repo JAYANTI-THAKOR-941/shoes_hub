@@ -187,3 +187,11 @@ a{
 .new-cart-title p{
     margin-top: 13px;
 }
+.total{
+    text-align: right;
+    width: 80%;
+    margin:20px auto;
+}
+.cta-btn{
+    margin: 00px 10%;
+}

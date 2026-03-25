@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import './main.css';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../redux/cartSlice';
 
 const ProductDescription = () => {
 
@@ -10,6 +12,8 @@ const ProductDescription = () => {
     const [error, setError] = useState('');
 
     const navigate = useNavigate();
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const products = localStorage.getItem('foodProducts');
@@ -50,8 +54,12 @@ const ProductDescription = () => {
                 <h1>{product.name}</h1>
                 <p>{product.description}</p>
                 <p>{product.longDescription}</p>
-                <p>Price:₹{product.price}</p>
-                <button className='cart-btn' onClick={()=>navigate('/cart')}>Add to Cart</button>
+                <p><b>Category: </b>{product.category}</p>
+                <p><b>Price: ₹</b>{product.price}</p>
+                <button className='cart-btn' onClick={()=>{
+                    dispatch(addToCart(product));
+                    navigate('/cart');
+                }}>Add to Cart</button>
             </div>
         </div>
         </>
