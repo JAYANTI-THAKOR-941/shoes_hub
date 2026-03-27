@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './style.css';
+import { UserContext } from '../context/UserContext';
 
 const Header = () => {
 
   const navigate = useNavigate();
+
+  const user = useContext(UserContext);
 
   return (
     <div className='header'>
@@ -19,7 +22,7 @@ const Header = () => {
         <Link to='/contact'>Contact Us</Link>
       </div>
       <div className="btns">
-        <button onClick={() => navigate('/login')}>Login</button>
+          <button onClick={()=>navigate('/profile')}>{user.name[0]}</button>
       </div>
     </div>
   )
