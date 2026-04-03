@@ -1,14 +1,21 @@
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './style.css';
-import { UserContext } from '../context/UserContext';
+// import { UserContext } from '../context/UserContext';
 
 const Header = () => {
 
   const navigate = useNavigate();
 
-  const user = useContext(UserContext);
+  // const user = useContext(UserContext);
 
+    const user = JSON.parse(localStorage.getItem('userToken'));
+
+    const handleLogout = ()=>{
+      localStorage.removeItem('userToken');
+      alert('Logout successfully.!!');
+      window.location.reload();
+    }
   return (
     <div className='header'>
       <div className="logo">
@@ -22,7 +29,8 @@ const Header = () => {
         <Link to='/contact'>Contact Us</Link>
       </div>
       <div className="btns">
-          <button onClick={()=>navigate('/profile')}>{user.name[0]}</button>
+          {/* <button onClick={()=>navigate('/profile')}>{user.name[0]}</button> */}
+          {user ? <button onClick={handleLogout}>Logout</button>:<button onClick={()=>navigate('/login')}>Login</button>}
       </div>
     </div>
   )

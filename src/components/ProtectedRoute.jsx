@@ -1,17 +1,16 @@
-// import React, { Children, useContext } from 'react'
-// import { AuthContext } from '../context/AuthContext'
-// import { Navigate } from 'react-router-dom';
-// // import { useNavigate } from 'react-router-dom';
 
-// const ProtectedRoute = ({children}) => {
-//     const {isAdmin} = useContext(AuthContext);
+import React from 'react'
+import { Navigate, Outlet } from 'react-router-dom';
 
-//     if(!isAdmin){
-//        <Navigate to='/' replace/>
-//     }
-//   return (
-//     children
-//   )
-// }
+const ProtectedRoute = () => {
 
-// export default ProtectedRoute
+    const user = JSON.parse(localStorage.getItem('userToken'));
+
+    if(!user || !user.role == 'admin'){
+        return <Navigate to='/login' replace/>
+    }
+    
+    return <Outlet/>
+}
+
+export default ProtectedRoute

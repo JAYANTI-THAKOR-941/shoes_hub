@@ -15,6 +15,7 @@ import Cart from './pages/Cart'
 import Profile from './components/Profile';
 import { UserProvider } from './context/UserContext'
 import PageNotFound from './pages/PageNotFound'
+import ProtectedRoute from './components/ProtectedRoute'
 
 // import { UserContext } from './context/UserContext';
 
@@ -46,7 +47,9 @@ const App = () => {
         <Route path='/contact' element={<Contact />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/manage-products' element={<ProductManagement/>} />
+        <Route element={<ProtectedRoute/>}>
+           <Route path='/manage-products' element={<ProductManagement/>} />
+        </Route>
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </div>
